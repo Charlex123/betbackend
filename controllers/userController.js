@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel.js");
-const Referral = require("../models/referralModel.js");
 const generateToken = require("../utils/generateToken.js");
 const generateRanNum = require("../utils/generateRanNum.js");
 const mongoose = require("mongoose");
