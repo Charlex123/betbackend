@@ -363,6 +363,24 @@ const authUser = asyncHandler(async (req, res) => {
 });
 
 
+const getDownlines = asyncHandler(async (req, res) => {
+  const { uname } = req.body;
+  const user = await User.find({ "username":uname });
+  console.log('u ser',user)
+  if(user) {
+      // get user id
+      const userid = user._id;
+
+      const downlines = await User.find({"upline": uname});
+      //check if user has a referral
+      res.status(201).json({
+        downlines: downlines
+      });
+
+  }
+    
+});
+
 //@description     Register new user
 //@route           POST /api/users/
 //@access          Public
@@ -725,4 +743,4 @@ const resendverificationMail = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { activateAccount,checkEmail, checkForgotEmail,checkUserName, authUser, updateUserProfile, registerUser, verifyUser, resendverificationMail, resetPassword, updateTransactionPin };
+module.exports = {getDownlines, activateAccount,checkEmail, checkForgotEmail,checkUserName, authUser, updateUserProfile, registerUser, verifyUser, resendverificationMail, resetPassword, updateTransactionPin };
